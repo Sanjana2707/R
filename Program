@@ -1,0 +1,164 @@
+1. # Create vectors A and B with multiple elements
+A <- c(1, 2, 3, 4, 5)
+B <- c(6, 7, 8, 9, 10)
+# Arithmetic operations on vectors A and B
+sum_A_B <- A + B # Addition
+diff_A_B <- A - B # Subtraction
+prod_A_B <- A * B # Element-wise multiplication
+div_A_B <- A / B # Element-wise division
+pow_A_B <- A ^ B # Element-wise exponentiation
+# Print the results
+cat("Sum of A and B:", sum_A_B, "\n")
+cat("Difference of A and B:", diff_A_B, "\n")
+cat("Product of A and B:", prod_A_B, "\n")
+cat("Division of A and B:", div_A_B, "\n")
+cat("Exponentiation of A and B:", pow_A_B, "\n")
+# Apply rep(), paste(), and cumprod() functions on vector A
+rep_A <- rep(A, times = 2) # Repeat A twice
+paste_A <- paste("A:", A, sep = " ") # Concatenate "A:" with each element of A
+cumprod_A <- cumprod(A) # Cumulative product of A
+# Print the results
+cat("Repeated A:", rep_A, "\n")
+cat("Concatenated A:", paste_A, "\n")
+cat("Cumulative product of A:", cumprod_A, "\n")
+
+2.Name <- c("Ram", "Alwin", "Billy", "Amera", "Olive", "Dora")
+Age <- c(30, 35, 22, 16, 42, 59)
+Height <- c(177, 164, 155, 180, 124, 150)
+Weight <- c(57, 48, 45, 60, 52, 55)
+Gender <- as.factor(c("M", "F", "M", "F", "F", "F"))
+df <- data.frame(Name, Age, Height, Weight, Gender)
+# Invert gender for all individuals
+levels(df$Gender) <- c("M", "F")
+df$Gender <- as.factor(df$Gender)
+df
+# Create the new data frame
+Working <- c("Y", "N", "Y", "N", "Y", "N")
+df2 <- data.frame(Working, stringsAsFactors = FALSE)
+# Add the new data frame to the previous one
+df <- cbind(df, df2)
+# Print the modified data frame
+df
+3.class(state.x77)
+s77 <- data.frame(state.x77)
+class(s77)
+#B
+summary(s77)
+nrow(s77[s77$Income < 5000,])
+#C
+row.names(s77 [which.max(s77$Income),])
+row.names(s77 [which.min(s77$Income),])
+#d
+df<-
+  data.frame(state.abb,state.area,state.division,state.region,row.names=state.name)
+colnames(df)<-substr(colnames(df),7,9)
+new.df<-cbind(state.x77,df)
+new.df
+#e
+new.df$div<-NULL
+new.df<-subset(new.df,, -c(4,6,7,9,10))
+new.df
+#f
+new.df$Illiteracy.Levels<-ifelse(new.df$Illiteracy >=0 &
+                                   new.df$Illiteracy < 1, "Low",
+                                 ifelse(new.df$Illiteracy >= 1 &
+                                          new.df$Illiteracy < 2,"Some",
+                                        "High"))
+new.df$Illiteracy.Levels
+#g
+x<-subset(new.df,reg =="West" & Illiteracy.Levels =="Low")
+row.names(x[which.max(x$Income),])
+
+
+4.for (a in 1:3) {
+  for (b in 1:3) {
+    print(paste("a =", a, "b =", b))
+    if (b == 2) {
+      break
+    }
+  }
+}
+i <- 2
+while (i <= 5) {
+  if (i == 4) {
+    i <- i + 1
+    next
+  }
+  print(i)
+  i <- i + 1
+}
+
+5.count_divisors <- function(num) {
+  divisors <- vector("numeric")
+  count <- 0
+  for (i in 2:(num - 1)) {
+    if (num %% i == 0) {
+      divisors <- append(divisors, i)
+      count <- count + 1
+    }
+  }
+  if (count == 0) {
+    message("The number has no divisors other than 1 and itself.")
+  } else {
+    cat("Divisors:", divisors, "\n")
+    cat("Number of divisors (excluding 1 and itself):", count, "\n")
+  }
+}
+# Example usage:
+num <- 24
+count_divisors(num)
+
+
+6.replace_with_na <- function(data_frame, value) {
+  # Loop through each column of the data frame
+  for (col in colnames(data_frame)) {
+    # Replace the specified value with NA in the column
+    data_frame[[col]][data_frame[[col]] == value] <- NA
+  }
+  return(data_frame)
+}
+# Create a sample data frame
+df <- data.frame(
+  col1 = c(1, 2, 3, 4),
+  col2 = c("a", "b", "c", "d"),
+  col3 = c(5, 6, 7, 8)
+)
+# Print the original data frame
+print(df)
+# Call the replace_with_na function to replace "b" with NA
+df_new <- replace_with_na(df, "b")
+# Print the modified data frame
+print(df_new)
+7.# Step a: Read the contents of the file
+data <- read.table("table0.txt", header = TRUE, na.strings = c("*", "--", "**"))
+# Step b: Find the missing values
+missing_values <- sum(is.na(data))
+cat("Number of missing values:", missing_values, "\n")
+# Step c: Replace the missing values in column 4 with the average of the column values
+average_weight <- mean(data$Weight, na.rm = TRUE)
+data$Weight[is.na(data$Weight)] <- average_weight
+# Print the modified data
+print(data)
+
+8.# Read the file 
+data <- read.table("Table1.txt", header = FALSE)
+ # Set the column names 
+colnames(data) <- c("Name", "Age", "Height", "Weight", "Gender") 
+# Set the row names to the values in the first column (Name) 
+rownames(data) <- data$Name 
+# Remove the Name variable 
+data <- data[, -1]
+ # Print the modified data 
+print(data)
+
+9.# Load the mtcars dataset
+data(mtcars)
+# Plot Miles/(US) gallon versus Rear axle ratio as a line plot
+plot(mtcars$mpg, mtcars$drat, main = "Miles/(US) gallon versus Rear axle
+ratio",
+     xlab = "Miles/(US) gallon", ylab = "Rear axle ratio")
+# Change the visualization to a scatter plot
+plot(mtcars$mpg, mtcars$drat, main = "Miles/(US) gallon versus Rear axle ratio
+(Scatter Plot)",
+     xlab = "Miles/(US) gallon", ylab = "Rear axle ratio", type = "p")
+
